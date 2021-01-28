@@ -10,6 +10,8 @@ import QuizBackground from '../src/components/QuizBackground';
 import Footer from '../src/components/Footer';
 import GitHubCorner from '../src/components/GithubCorner';
 import { route } from 'next/dist/next-server/server/router';
+import Input from '../src/components/Input';
+import Button from '../src/components/Button';
 
 export const QuizContainer = styled.div`
     width: 100%;
@@ -37,7 +39,7 @@ function Home() {
             <QuizContainer>
                 <Widget>
                     <Widget.Header>
-                        <h1>The Legend of zelda</h1>
+                        <h1>#Quiz Java Script</h1>
                     </Widget.Header>
                     <Widget.Content>
                         <form onSubmit={ (event ) => {
@@ -45,15 +47,31 @@ function Home() {
                             router.push(`/quiz?name=${name}`)
                             console.log('teste')
                         }}>
-                            <input placeholder="Dia ai seu nome" onChange={(event) => {
-                                const {value} = event.target
-                                setName(value)
-                            }} />
-                            <button type="submit" disabled={name.length === 0}>
+                            <Input
+                                name="nomeDoUsuario" 
+                                placeholder="Dia ai seu nome" 
+                                onChange={(event) => {
+                                    const {value} = event.target
+                                    setName(value)
+                                }
+                            } />
+                            <Button type="submit" disabled={name.length === 0}>
                                 Jogar {name}
-                            </button>
+                            </Button>
 
                         </form>
+                    </Widget.Content>
+                </Widget>
+                <Widget>
+                    <Widget.Header>
+                        <h1>#Quiz Java Script</h1>
+                    </Widget.Header>
+                    <Widget.Content>
+                            <Widget.Content>
+                                <h1>Quizes da Galera</h1>
+                                <p>lorem ipsum dolor sit amet..</p>
+                            </Widget.Content>
+
                     </Widget.Content>
                 </Widget>
                 <Footer />
