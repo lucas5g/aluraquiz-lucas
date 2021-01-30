@@ -49,20 +49,29 @@ function QuestionWidget({ question, questionIndex, totalQuestions }) {
                 <p>
                     {question.description}
                 </p>
-                {/* {console.log(question.alternatives[0])} */}
-                {question.alternatives.map((alternative) => 
-                    <p>
-                        {alternative}
-                    </p>
-                )}
-                {/* <pre>
-                    {JSON.stringify(question, null, 4)}
-                </pre> */}
-                <Button 
-                    type="submit"
+                <form>
+
+                    {question.alternatives.map((alternative, index) =>
+                        // const alternativeId = `alternative_${index}`
+                        <Widget.Topic
+                            key={index}
+                            as="label"
+                            htmlFor={index}
+                        >
+                            <input
+                                id={index}
+                                name={questionIndex}
+                                type="radio"
+                            />
+                            {alternative}
+                        </Widget.Topic>
+                    )}
+                    <Button
+                        type="submit"
                     >
-                    Confirmar
+                        Confirmar
                 </Button>
+                </form>
             </Widget.Content>
         </Widget>
     );

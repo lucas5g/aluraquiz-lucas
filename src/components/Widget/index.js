@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 
-const Widget = styled.div`
+const Widget = styled.div `
     margin-top: 24px;
     margin-bottom: 24px;
     border: 1px solid ${({ theme}) => theme.colors.primary};
@@ -22,7 +22,7 @@ const Widget = styled.div`
     }
 `
 
-Widget.Header = styled.header`
+Widget.Header = styled.header `
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -34,7 +34,7 @@ Widget.Header = styled.header`
     }
 `
 
-Widget.Content = styled.div`
+Widget.Content = styled.div `
     padding: 24px 32px 32px 32px;
     & > *:first-child{
         margin-top: 0;
@@ -47,5 +47,24 @@ Widget.Content = styled.div`
         padding: 0;
     }
 `
+
+Widget.Topic = styled.a`
+    outline: a;
+    text-decoration: none;
+    color: ${({ theme }) => theme.colors.constrastText};
+    background-color: ${({ theme }) => `${theme.colors.primary}40`};
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    border-radius: ${({ theme }) => theme.borderRadius };
+    transition: .3s;
+    display: block;
+
+    &:hover,
+    &:focus{
+        opacity: .5;
+    }
+`
+
 
 export default Widget
