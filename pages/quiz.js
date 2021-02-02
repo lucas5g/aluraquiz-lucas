@@ -59,6 +59,7 @@ function QuestionWidget({ question, questionIndex, totalQuestions }) {
                             htmlFor={index}
                         >
                             <input
+                                // style={{display:'none'}}
                                 id={index}
                                 name={questionIndex}
                                 type="radio"
@@ -84,6 +85,7 @@ const screenStates = {
 };
 export default function QuizPage() {
     // console.log('Perguntas criadas: ', db.questions)
+    const screenState = 'LOADING'
     const totalQuestions = db.questions.length
     const questionIndex = 0
     const question = db.questions[questionIndex]
@@ -91,15 +93,21 @@ export default function QuizPage() {
         <QuizBackground>
             <QuizContainer>
                 <QuizLogo />
-                <QuestionWidget
-                    question={question}
-                    questionIndex={questionIndex}
-                    totalQuestions={totalQuestions}
 
-                />
+                {screenState === 'QUIZ' && (
 
+                    <QuestionWidget
+                        question={question}
+                        questionIndex={questionIndex}
+                        totalQuestions={totalQuestions}
 
-                <LoadingWidget />
+                    />
+                )}
+                {screenState === 'LOADING' && <LoadingWidget />}
+
+                {screenState === 'RESULT' &&
+                    <div> Você acertou x questões, parabéns!</div>}
+
             </QuizContainer>
         </QuizBackground >
     );
