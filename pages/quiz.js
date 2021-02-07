@@ -5,6 +5,7 @@ import Widget from '../src/components/Widget';
 import QuizLogo from '../src/components/QuizLogo';
 import QuizBackground from '../src/components/QuizBackground';
 import QuizContainer from '../src/components/QuizContainer';
+import AlternativesForm from '../src/components/AlternativesForm';
 import Button from '../src/components/Button';
 
 
@@ -37,7 +38,7 @@ function ResultWidget({ results }) {
               {index + 1}
               {' '}
                Resultado:
-               {result}
+              {result}
               {result === true ? 'Acertou' : 'Errou'}
             </li>
 
@@ -99,40 +100,45 @@ function QuestionWidget({ question, questionIndex, totalQuestions, onSubmit }) {
         <p>
           {question.description}
         </p>
-        <form onSubmit={(event) => {
-          event.preventDefault()
-          setIsQuestionSubmited(true)
-          setTimeout(() => {
-            addResult(isCorrect)
-            setIsQuestionSubmited(false)
-            setSelectedAlternative(undefined)
-            onSubmit()
-          }, 3 * 1000)
-        }}>
+        <AlternativesForm
+          onSubmit={(event) => {
+            event.preventDefault()
+            setIsQuestionSubmited(true)
+            setTimeout(() => {
+              addResult(isCorrect)
+              setIsQuestionSubmited(false)
+              setSelectedAlternative(undefined)
+              onSubmit()
+            }, 3 * 1000)
+          }}>
 
-          {question.alternatives.map((alternative, index) =>
-            // const alternativeId = `alternative_${index}`
-            <Widget.Topic
-              key={index}
-              as="label"
-              htmlFor={index}
-            >
-              <input
-                // style={{display:'none'}}
-                id={index}
-                name={questionIndex}
-                type="radio"
-                onChange={() => setSelectedAlternative(index)}
-              />
-              {alternative}
-            </Widget.Topic>
-          )}
+          {question.alternatives.map((alternative, alternativeIndex) => {
+            const alternativeId = `alternative_${alternativeIndex}`
+            const alternativeStatus = isCorrect ? 'SUCCESS':'ERROR'
+            const isSelected = setSelectedAlternative === alternativeId
+              <Widget.Topic
+                as="label"
+                key={alternativeId}
+                htmlFor={alternativeId}
+                data-selected={isSelected}
+                data-status={isQuestionSubmited && alternativeStatus}
+              >
+                <input
+                  style={{display:'none'}}
+                  id={alternativeId}
+                  name={questionId}
+                  type="radio"
+                  onChange={() => setSelectedAlternative(alternativeIndex)}
+                />
+                {alternative}
+              </Widget.Topic>
+          })}
           <Button type="submit" disabled={!hasAlternativeSelected} >
             Confirmar
           </Button>
           {isQuestionSubmited && isCorrect && <p> Você acertou</p>}
           {isQuestionSubmited && !isCorrect && <p>Você errou!</p>}
-        </form>
+        </AlternativesForm>
       </Widget.Content>
     </Widget>
   );
