@@ -111,17 +111,17 @@ function QuestionWidget({ question, questionIndex, totalQuestions, onSubmit }) {
               onSubmit()
             }, 3 * 1000)
           }}>
-
+      
           {question.alternatives.map((alternative, alternativeIndex) => {
-            const alternativeId = `alternative_${alternativeIndex}`
-            const alternativeStatus = isCorrect ? 'SUCCESS':'ERROR'
-            const isSelected = setSelectedAlternative === alternativeId
+            const alternativeId = `alternative_${alternativeIndex}`;
+            const alternativeStatus = isCorrect ? 'SUCCESS':'ERROR';
+            const isSelected = setSelectedAlternative === alternativeIndex;
               <Widget.Topic
                 as="label"
                 key={alternativeId}
                 htmlFor={alternativeId}
-                data-selected={isSelected}
-                data-status={isQuestionSubmited && alternativeStatus}
+                // data-selected={isSelected}
+                // data-status={isQuestionSubmited && alternativeStatus}
               >
                 <input
                   style={{display:'none'}}
@@ -130,9 +130,10 @@ function QuestionWidget({ question, questionIndex, totalQuestions, onSubmit }) {
                   type="radio"
                   onChange={() => setSelectedAlternative(alternativeIndex)}
                 />
-                {alternative}
-              </Widget.Topic>
-          })}
+                 {alternative}
+              </ Widget.Topic>
+             
+          })}  
           <Button type="submit" disabled={!hasAlternativeSelected} >
             Confirmar
           </Button>
@@ -151,7 +152,7 @@ const screenStates = {
 };
 export default function QuizPage() {
   // console.log('Perguntas criadas: ', db.questions)
-  const [screenState, setScreenState] = useState(screenStates.RESULT)
+  const [screenState, setScreenState] = useState(screenStates.LOADING)
   const [results, setResults] = useState([true, false, true])
   const totalQuestions = db.questions.length
   const [currentQuestion, setCurrentQuestion] = useState(0)
