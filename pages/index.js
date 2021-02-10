@@ -4,14 +4,14 @@ import Head from 'next/head';
 import { useRouter } from 'next/router'
 
 
-import db from '../../db.json';
-import Widget from '../../src/components/Widget';
-import QuizBackground from '../../src/components/QuizBackground';
-import Footer from '../../src/components/Footer';
-import GitHubCorner from '../../src/components/GithubCorner';
+import db from '../db.json';
+import Widget from '../src/components/Widget';
+import QuizBackground from '../src/components/QuizBackground';
+import Footer from '../src/components/Footer';
+import GitHubCorner from '../src/components/GithubCorner';
 import { route } from 'next/dist/next-server/server/router';
-import Input from '../../src/components/Input';
-import Button from '../../src/components/Button';
+import Input from '../src/components/Input';
+import Button from '../src/components/Button';
 
 export const QuizContainer = styled.div`
     width: 100%;
