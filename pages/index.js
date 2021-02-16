@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Head from 'next/head';
+import { motion } from 'framer-motion'
 import { useRouter } from 'next/router'
 
 
@@ -12,6 +13,8 @@ import GitHubCorner from '../src/components/GithubCorner';
 import { route } from 'next/dist/next-server/server/router';
 import Input from '../src/components/Input';
 import Button from '../src/components/Button';
+import Link from '../src/components/Link';
+import QuizLogo from '../src/components/QuizLogo';
 
 export const QuizContainer = styled.div`
     width: 100%;
@@ -37,7 +40,17 @@ function Home() {
         </title>
       </Head>
       <QuizContainer>
-        <Widget>
+        <QuizLogo />
+        <Widget
+          as={motion.section}
+          transition={{ delay: 0, duration: 0.5}}
+          variants={{
+            show: { opacity: 1, y: '0'},
+            hidden: { opacity: 0, y: '100%'}
+          }}
+          initial="hidden"
+          animate="show"
+          >
           <Widget.Header>
             <h1>#Quiz Java Script</h1>
           </Widget.Header>
@@ -62,7 +75,17 @@ function Home() {
             </form>
           </Widget.Content>
         </Widget>
-        <Widget>
+        <Widget
+          as={motion.section}
+          transition={{ delay: 0.5, duration: 0.5}}
+          variants={{
+            show: { opacity: 1},
+            hidden: { opacity: 0}
+          }}
+          initial="hidden"
+          animate="show"
+        
+        >
           <Widget.Header>
             <h1>#Quiz Java Script</h1>
           </Widget.Header>
@@ -79,7 +102,9 @@ function Home() {
                     .split('.')
                   return(
                     <li key={linkExterno}>
-                      <Widget.Topic href={linkExterno}>
+                      <Widget.Topic 
+                        as={Link}
+                        href={`/quiz/${projectName}__${githubUser}`} >
                         {`${githubUser}/${projectName}`}
                       </Widget.Topic>
                     </li>
@@ -91,7 +116,16 @@ function Home() {
 
           </Widget.Content>
         </Widget>
-        <Footer />
+        <Footer 
+          as={motion.section}
+          transition={{ delay: 0.5, duration: 0.5}}
+          variants={{
+            show: { opacity: 1},
+            hidden: { opacity: 0}
+          }}
+          initial="hidden"
+          animate="show"        
+        />
       </QuizContainer>
       <GitHubCorner projectUrl="https:github.com/lucas5g" />
 
